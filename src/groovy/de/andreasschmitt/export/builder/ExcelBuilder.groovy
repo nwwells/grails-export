@@ -154,7 +154,6 @@ class ExcelBuilder extends BuilderSupport {
         				log.debug("Creating label cell")
         				value = new Label(attributes?.column, attributes?.row, attributes?.value?.toString())
         			}
-
     				if(attributes?.format && formats.containsKey(attributes?.format)){
     					value.setCellFormat(formats[attributes.format])
     				}
@@ -213,6 +212,9 @@ class ExcelBuilder extends BuilderSupport {
         	    			
         	    	WritableFont font = new WritableFont(attributes.name, attributes["size"], attributes.bold, attributes.italic, attributes.underline);
         	    	WritableCellFormat cellFormat = new WritableCellFormat(font);
+        	    	if(attributes.alignment){
+                        cellFormat.setAlignment(attributes.alignment);
+        	    	}
         	    	formats.put(format, cellFormat)	
     			}
     			catch(Exception e){
