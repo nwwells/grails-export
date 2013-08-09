@@ -1,6 +1,12 @@
 package de.andreasschmitt.export.builder
 
 import groovy.util.BuilderSupport
+import jxl.CellView
+import jxl.format.Border
+import jxl.format.BorderLineStyle
+import jxl.format.CellFormat
+import jxl.format.Colour
+import jxl.format.Pattern
 import jxl.write.WritableFont
 import jxl.Workbook
 import jxl.write.Label
@@ -134,7 +140,13 @@ class ExcelBuilder extends BuilderSupport {
 						attributes.widths.eachWithIndex { width, i ->
 							sheet.setColumnView(i, (width < 1.0 ? width * 100 : width) as int )
 						}
-					}
+					} else {
+                        if(attributes?.widthAutoSize){
+                            for(int i = 0; i < attributes.numberOfFields - 1; i++){
+                                sheet.setColumnView(i, new CellView(autosize: true))
+                            }
+                        }
+                    }
     			}
     			catch(Exception e){
     				log.error("Error creating sheet", e)
@@ -191,6 +203,9 @@ class ExcelBuilder extends BuilderSupport {
         	    	attributes.bold = attributes?.bold ? attributes?.bold : "false"
         	    	attributes["size"] = attributes["size"] ? attributes["size"] : WritableFont.DEFAULT_POINT_SIZE
         	    	attributes.underline = attributes?.underline ? attributes?.underline : "none"
+                    //attributes.backColor = attributes?.backColor ? attributes?.backColor : Colour.WHITE
+                    attributes.foreColor = attributes?.foreColor ? attributes?.foreColor : Colour.BLACK
+                    attributes.useBorder = attributes?.useBorder ? attributes?.useBorder : false
         	    			
         	    	Map bold = ["true": WritableFont.BOLD, "false": WritableFont.NO_BOLD]		
         	    	if(bold.containsKey(attributes.bold.toString())){
@@ -211,9 +226,14 @@ class ExcelBuilder extends BuilderSupport {
         	    	
         	    	log.debug("attributes: ${attributes}")
         	    			
-        	    	WritableFont font = new WritableFont(attributes.name, attributes["size"], attributes.bold, attributes.italic, attributes.underline);
-        	    	WritableCellFormat cellFormat = new WritableCellFormat(font);
-        	    	formats.put(format, cellFormat)	
+                    WritableFont font = new WritableFont(attributes.name, attributes["size"], attributes.bold, attributes.italic, attributes.underline)
+                    font.colour = attributes.foreColor
+                    WritableCellFormat cellFormat = new WritableCellFormat(font)
+
+                    if (attributes.useBorder) cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN)
+                    if (attributes.backColor) cellFormat.setBackground(attributes.backColor)
+
+                    formats.put(format, cellFormat)
     			}
     			catch(Exception e){
     				println "Error!"
