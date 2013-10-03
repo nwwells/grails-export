@@ -16,6 +16,7 @@ import com.lowagie.text.Element
 import com.lowagie.text.Rectangle
 import java.awt.Color
 import java.util.Map;
+import com.lowagie.text.Image
 
 /**
  * @author Andreas Schmitt
@@ -33,7 +34,13 @@ class DefaultPDFExporter extends AbstractExporter {
 			
 			PdfWriter.getInstance(document, outputStream)
 			document.open()
-			
+
+            if (getParameters().containsKey(("pdf.logo"))){
+                String logoPath = getParameters().get("pdf.logo")
+                Image logo = Image.getInstance(logoPath)
+                document.add(logo)
+            }
+
 			int fontSize = 8
 			
 			// Default encoding is Latin 1
@@ -48,6 +55,7 @@ class DefaultPDFExporter extends AbstractExporter {
 			
 			// Header font
 			Font header = createFont("header", FontFactory.HELVETICA, encoding, 8, Font.BOLD)
+            header.setColor(Color.white)
 			
 			// Text font
 			Font text = createFont("text", FontFactory.HELVETICA, encoding, 8, Font.NORMAL)
@@ -154,6 +162,7 @@ class DefaultPDFExporter extends AbstractExporter {
 				fields.each { field ->
 					String value = getLabel(field)
 					PdfPCell cell = new PdfPCell(new Paragraph(value, header))
+                    cell.setBackgroundColor(Color.black)
 					cell.setBorderColor(borderColor)
 					cell.setMinimumHeight(minimumCellHeight)
 					table.addCell(cell)
