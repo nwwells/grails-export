@@ -32,7 +32,7 @@ class RenderUtils {
 		//String pluginVersion = plugin?.version
 				
 		//The above version doesn't work on Jetty so for now an ugly approach will be used
-		String pluginVersion = "1.5"
+		String pluginVersion = "1.6"
 		
 		"${contextPath}/plugins/${pluginName.toLowerCase()}-$pluginVersion"
 	}
