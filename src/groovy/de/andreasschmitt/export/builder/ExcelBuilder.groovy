@@ -158,7 +158,6 @@ class ExcelBuilder extends BuilderSupport {
     		case "cell":
     			try {
     				CellValue value
-    				
         			if(attributes?.value instanceof java.lang.Number){
         				log.debug("Creating number cell")
         				value = new Number(attributes?.column, attributes?.row, attributes?.value)
@@ -174,7 +173,6 @@ class ExcelBuilder extends BuilderSupport {
     				if(attributes?.format && formats.containsKey(attributes?.format)){
     					value.setCellFormat(formats[attributes.format])
     				}
-    				
 					
 					// Create hyperlinks for values beginning with http
 					if (attributes?.value?.toString()?.toLowerCase()?.startsWith('http://') || attributes?.value?.toString()?.toLowerCase()?.startsWith('https://')) {
