@@ -11,6 +11,7 @@ import jxl.write.WritableFont
 import jxl.Workbook
 import jxl.write.Label
 import jxl.write.Number
+import jxl.write.DateTime
 import jxl.write.WritableCellFormat
 import jxl.write.WritableFont
 import jxl.write.WritableSheet
@@ -157,11 +158,13 @@ class ExcelBuilder extends BuilderSupport {
     		case "cell":
     			try {
     				CellValue value
-    				
         			if(attributes?.value instanceof java.lang.Number){
         				log.debug("Creating number cell")
         				value = new Number(attributes?.column, attributes?.row, attributes?.value)
-        			}
+        			} else if(attributes?.value instanceof Date){
+                        log.debug("Creating date cell")
+                        value = new DateTime(attributes?.column, attributes?.row, attributes?.value)
+                    }
         			else {
         				log.debug("Creating label cell")
         				value = new Label(attributes?.column, attributes?.row, attributes?.value?.toString())
@@ -170,7 +173,6 @@ class ExcelBuilder extends BuilderSupport {
     				if(attributes?.format && formats.containsKey(attributes?.format)){
     					value.setCellFormat(formats[attributes.format])
     				}
-    				
 					
 					// Create hyperlinks for values beginning with http
 					if (attributes?.value?.toString()?.toLowerCase()?.startsWith('http://') || attributes?.value?.toString()?.toLowerCase()?.startsWith('https://')) {
