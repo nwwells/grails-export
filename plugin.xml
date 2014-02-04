@@ -18,7 +18,15 @@ and can be extended to add additional formats.
     <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
     <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
   </repositories>
-  <dependencies />
+  <dependencies>
+    <compile>
+      <dependency group='com.lowagie' name='itext' version='2.1.5' />
+      <dependency group='com.lowagie' name='itext-rtf' version='2.1.5' />
+    </compile>
+    <runtime>
+      <dependency group='xerces' name='xercesImpl' version='2.9.0' />
+    </runtime>
+  </dependencies>
   <plugins />
   <runtimePluginRequirements />
   <behavior />
