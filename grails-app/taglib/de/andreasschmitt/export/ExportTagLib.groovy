@@ -63,7 +63,7 @@ class ExportTagLib {
 						extension = extensions[format]
 					}
 					
-					Map params = [format: format, extension: extension] + parameters
+					Map params = [exportFormat: format, format: format, extension: extension] + parameters
 					
 					a('class': format, href: "${createLink(controller: controller, action: action, params: params)}", message)
 				}	
