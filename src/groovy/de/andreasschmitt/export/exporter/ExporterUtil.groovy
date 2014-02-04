@@ -16,7 +16,8 @@ class ExporterUtil {
 					mapping: true, '$defaultDatabindingWhiteList': true, '__$stMC': true,
 					errors: true, instanceControllersDomainBindingApi: true, 
 					instanceConvertersApi: true, instanceDatabindingApi: true,
-					'log': true]
+					'log': true, 
+					'$changedProperties': true, 'instanceGormInstanceApi': true, 'instanceGormValidationApi': true, 'staticGormStaticApi': true]
 	
 	private static Log log = LogFactory.getLog(ExporterUtil)
 	
