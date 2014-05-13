@@ -4,22 +4,29 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
+grails.project.dependency.resolver="maven"
 grails.project.dependency.resolution = {
     inherits("global") {}
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
         grailsCentral()
+        mavenCentral()
+        mavenRepo "http://repo.grails.org/grails/core"
     }
 
     dependencies {
-        compile("com.lowagie:itext:2.1.5")
-        compile("com.lowagie:itext-rtf:2.1.5")
+        compile 'net.sf.opencsv:opencsv:2.3'
+
+        compile 'com.lowagie:itext:2.1.7'
+        compile("com.lowagie:itext-rtf:2.1.7")
         runtime 'xerces:xercesImpl:2.9.0'
+        compile 'org.odftoolkit:odfdom-java:0.8.5'
+        compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
     }
 
     plugins {
-        build(":tomcat:$grailsVersion",
-                ":release:2.0.3") {
+        build(":tomcat:7.0.52.1",
+                ":release:3.0.1") {
             export = false
         }
     }
