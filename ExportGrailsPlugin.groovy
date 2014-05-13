@@ -24,8 +24,6 @@ class ExportGrailsPlugin {
 This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML 
 and can be extended to add additional formats. 
 '''
-    def documentation = "http://gpc.github.com/grails-rendering"
-
     def license = 'APACHE'
     def organization = [name: 'Grails Plugin Collective', url: 'http://github.com/gpc']
     def issueManagement = [system: 'JIRA', url: 'http://jira.grails.org/browse/GPEXPORT']
