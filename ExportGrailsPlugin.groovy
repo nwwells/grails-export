@@ -19,7 +19,6 @@ class ExportGrailsPlugin {
 
     def author = "Grails Plugin Collective"
     def authorEmail = "grails.plugin.collective@gmail.com"
-    def title = "Grails Rendering"
     def description = '''\
 This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML 
 and can be extended to add additional formats. 
