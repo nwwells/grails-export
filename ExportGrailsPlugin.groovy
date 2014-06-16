@@ -41,7 +41,7 @@ and can be extended to add additional formats.
 		  		try {
 		  			//Override default renderer configuration
 					if(application.config?.export."${key}"){
-						value = grailsApplication.config.export."${key}"
+						value = application.config.export."${key}"
 					}
 		  			
 		      		Class clazz = Class.forName(value, true, new GroovyClassLoader())
