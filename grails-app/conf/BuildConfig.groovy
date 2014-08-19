@@ -1,6 +1,6 @@
 if(System.getenv('TRAVIS_BRANCH')) {
     grails.project.repos.grailsCentral.username = System.getenv("GRAILS_CENTRAL_USERNAME")
-    grails.project.repos.grailsCentral.password = System.getenv("GRAILS_CENTRAL_PASSWORD")    
+    grails.project.repos.grailsCentral.password = System.getenv("GRAILS_CENTRAL_PASSWORD")
 }
 
 grails.project.class.dir = "target/classes"
@@ -27,6 +27,7 @@ grails.project.dependency.resolution = {
         runtime 'xerces:xercesImpl:2.9.0'
         compile 'org.odftoolkit:odfdom-java:0.8.5'
         compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
+        compile 'commons-beanutils:commons-beanutils:1.8.3'
     }
 
     plugins {
