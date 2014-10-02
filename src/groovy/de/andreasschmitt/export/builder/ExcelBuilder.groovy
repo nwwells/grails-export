@@ -234,6 +234,7 @@ class ExcelBuilder extends BuilderSupport {
 
                     if (attributes.useBorder) cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN)
                     if (attributes.backColor) cellFormat.setBackground(attributes.backColor)
+                    if (attributes.alignment) cellFormat.setAlignment(attributes.alignment)
 
                     formats.put(format, cellFormat)
     			}
@@ -242,6 +243,14 @@ class ExcelBuilder extends BuilderSupport {
                     e.printStackTrace();
     			}
     			break
+            case "mergeCells":
+                log.debug("attributes: ${attributes}")
+                try {
+                    sheet.mergeCells(attributes?.startColumn, attributes?.startRow, attributes?.endColumn, attributes?.endRow)
+                } catch (Exception ex) {
+                    log.error("Could not merge cells.  Ensure startColumn, startRow, endColumn, endRow attributes are set.  Attributes: ${attributes}")
+                }
+                break
     	}
     	
         return null
