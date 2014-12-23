@@ -27,8 +27,8 @@ class ExportService {
     public void export(String type, HttpServletResponse response, String filename, String extension, List objects, List fields, Map labels, Map formatters, Map parameters) throws ExportingException {
     	// Setup response
     	response.contentType = grailsApplication.config.grails.mime.types[type]
-		response.setHeader("Content-disposition", "attachment; filename=${filename}.${extension}")
-    	
+        response.setHeader("Content-disposition", "attachment; filename=\"" + filename + "." + extension + "\"")
+
     	Exporter exporter = exporterFactory.createExporter(type, fields, labels, formatters, parameters)    	
     	exporter.export(response.outputStream, objects)
     }    
